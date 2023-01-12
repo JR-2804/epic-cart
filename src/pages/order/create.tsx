@@ -1,10 +1,10 @@
 import type { Product } from "@prisma/client";
-import type { GetStaticProps, NextPage } from "next";
+import type { GetStaticProps } from "next";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { prisma } from "../../server/db";
 
-const CreateOrderPage: NextPage<{ products: Product[] }> = ({ products }) => {
+const CreateOrderPage = ({ products }: { products: Product[] }) => {
   const router = useRouter();
   const { account } = router.query;
 

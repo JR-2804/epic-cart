@@ -1,11 +1,11 @@
 import { useState } from "react";
-import type { GetStaticProps, NextPage } from "next";
+import type { GetStaticProps } from "next";
 import Head from "next/head";
 import Link from "next/link";
 import { Combobox } from "@headlessui/react";
 import { prisma } from "../server/db";
 
-const HomePage: NextPage<{ accounts: string[] }> = ({ accounts }) => {
+const HomePage = ({ accounts }: { accounts: string[] }) => {
   const [selectedAccount, setSelectedAccount] = useState();
   const [query, setQuery] = useState("");
 
