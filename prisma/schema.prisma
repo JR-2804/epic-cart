@@ -13,7 +13,7 @@ model Account {
   phone     String
   address   Address @relation(fields: [addressId], references: [id])
   addressId String  @unique
-  Orders    Order[]
+  orders    Order[]
 }
 
 model Address {
@@ -22,7 +22,7 @@ model Address {
   city    String
   state   String
   zip     String
-  Account Account?
+  account Account?
 }
 
 model Order {
@@ -30,7 +30,7 @@ model Order {
   subtotal  Float
   taxes     Float
   total     Float
-  Account   Account?    @relation(fields: [accountId], references: [id])
+  account   Account?    @relation(fields: [accountId], references: [id])
   accountId String?
   items     OrderItem[]
 }
@@ -39,7 +39,7 @@ model OrderItem {
   id        String  @id @default(cuid())
   quantity  Int
   price     Float
-  Order     Order?  @relation(fields: [orderId], references: [id])
+  order     Order?  @relation(fields: [orderId], references: [id])
   orderId   String?
   product   Product @relation(fields: [productId], references: [id])
   productId String
