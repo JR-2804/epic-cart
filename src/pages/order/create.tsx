@@ -2,6 +2,7 @@ import type { Product } from "@prisma/client";
 import type { GetStaticProps } from "next";
 import Head from "next/head";
 import { useRouter } from "next/router";
+import ProductsList from "../../components/products-list";
 import { prisma } from "../../server/db";
 
 const CreateOrderPage = ({ products }: { products: Product[] }) => {
@@ -15,18 +16,8 @@ const CreateOrderPage = ({ products }: { products: Product[] }) => {
         <meta name="description" content="Salesforce interview project" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className="container grid h-screen grid-cols-2 gap-6 py-8">
-        <div className="bg-red-500">
-          <input type="text" placeholder="Filter products" />
-          {products.length === 0 && <h6>No existen productos</h6>}
-          {products.length > 0 &&
-            products.map((product) => (
-              <div key={product.id}>
-                <p>{product.name}</p>
-                <button type="button">Add</button>
-              </div>
-            ))}
-        </div>
+      <div className="container grid h-screen grid-cols-2 grid-rows-1 gap-6 py-8">
+        <ProductsList products={products} />
         <div className="bg-blue-500">
           <h1>New Order: {account}</h1>
         </div>
