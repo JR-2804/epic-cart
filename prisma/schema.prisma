@@ -13,7 +13,7 @@ model Account {
   phone     String
   address   Address @relation(fields: [addressId], references: [id])
   addressId String  @unique
-  Order     Order[]
+  Orders    Order[]
 }
 
 model Address {
