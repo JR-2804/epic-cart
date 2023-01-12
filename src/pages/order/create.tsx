@@ -1,17 +1,19 @@
 import type { Product } from "@prisma/client";
+import { useAtom } from "jotai";
 import type { GetStaticProps } from "next";
 import Head from "next/head";
-import { useRouter } from "next/router";
 import OrderCart from "../../components/order-cart";
 import ProductsList from "../../components/products-list";
+import useHasMounted from "../../hooks/use-has-mounted";
 import { prisma } from "../../server/db";
+import { selectedAccountAtom } from "../../utils/store";
 
 const CreateOrderPage = ({ products }: { products: Product[] }) => {
-  const router = useRouter();
-  const { account } = router.query;
+  const hasMounted = useHasMounted();
+  const [selectedAccount] = useAtom(selectedAccountAtom);
 
-  if (typeof account !== "string") {
-    return "Invalid account";
+  if (!hasMounted) {
+    return null;
   }
 
   return (
@@ -23,7 +25,7 @@ const CreateOrderPage = ({ products }: { products: Product[] }) => {
       </Head>
       <div className="container grid h-screen grid-cols-2 grid-rows-1 gap-6 py-8">
         <ProductsList products={products} />
-        <OrderCart account={account} />
+        <OrderCart account={selectedAccount} />
       </div>
     </>
   );

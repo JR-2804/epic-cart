@@ -4,15 +4,28 @@ import Head from "next/head";
 import Link from "next/link";
 import { Combobox } from "@headlessui/react";
 import { prisma } from "../server/db";
+import { useAtom } from "jotai";
+import { selectedAccountAtom } from "../utils/store";
+import { useRouter } from "next/router";
+import useHasMounted from "../hooks/use-has-mounted";
 
 const HomePage = ({ accounts }: { accounts: string[] }) => {
-  const [selectedAccount, setSelectedAccount] = useState();
+  const hasMounted = useHasMounted();
+
+  const router = useRouter();
+  const [selectedAccount, setSelectedAccount] = useAtom(selectedAccountAtom);
   const [query, setQuery] = useState("");
+
+  const goToCreateOrder = () => void router.push("/order/create");
 
   const matchesQuery = (query: string) => (account: string) =>
     account.toLowerCase().includes(query.toLowerCase());
 
   const filteredAccounts = accounts.filter(matchesQuery(query));
+
+  if (!hasMounted) {
+    return null;
+  }
 
   return (
     <>
@@ -22,7 +35,7 @@ const HomePage = ({ accounts }: { accounts: string[] }) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className="grid h-screen place-content-center gap-4">
-        <p>Select account ({selectedAccount})</p>
+        <p>Select account</p>
         <Combobox value={selectedAccount} onChange={setSelectedAccount}>
           <Combobox.Input
             onChange={(event) => setQuery(event.target.value)}
@@ -37,17 +50,14 @@ const HomePage = ({ accounts }: { accounts: string[] }) => {
             ))}
           </Combobox.Options>
         </Combobox>
-        <Link
-          href={{
-            pathname: "/order/create",
-            query: {
-              account: selectedAccount,
-            },
-          }}
-          className="bg-slate-500 text-center hover:bg-slate-600"
+        <button
+          type="button"
+          className="cursor-pointer bg-slate-500 text-center hover:bg-slate-600 disabled:bg-slate-200"
+          disabled={!selectedAccount}
+          onClick={goToCreateOrder}
         >
           Create Order
-        </Link>
+        </button>
       </main>
     </>
   );
