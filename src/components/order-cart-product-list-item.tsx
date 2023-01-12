@@ -1,6 +1,6 @@
 import type { Product } from "@prisma/client";
 
-const OrderCartItem = ({
+const OrderCartProductListItem = ({
   product,
   price,
   quantity,
@@ -16,4 +16,4 @@ const OrderCartItem = ({
   </div>
 );
 
-export default OrderCartItem;
+export default OrderCartProductListItem;
