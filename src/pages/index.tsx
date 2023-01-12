@@ -1,7 +1,6 @@
 import { useState } from "react";
 import type { GetStaticProps } from "next";
 import Head from "next/head";
-import Link from "next/link";
 import { Combobox } from "@headlessui/react";
 import { prisma } from "../server/db";
 import { useAtom } from "jotai";
@@ -34,7 +33,7 @@ const HomePage = ({ accounts }: { accounts: string[] }) => {
         <meta name="description" content="Salesforce interview project" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className="grid h-screen place-content-center gap-4">
+      <main className="grid place-content-center gap-4">
         <p>Select account</p>
         <Combobox value={selectedAccount} onChange={setSelectedAccount}>
           <Combobox.Input

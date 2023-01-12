@@ -23,7 +23,7 @@ const CreateOrderPage = ({ products }: { products: Product[] }) => {
         <meta name="description" content="Salesforce interview project" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className="container grid h-screen grid-cols-2 grid-rows-1 gap-6 py-8">
+      <div className="grid grid-cols-2 grid-rows-1 gap-6 py-8">
         <ProductsList products={products} />
         <OrderCart account={selectedAccount} />
       </div>
