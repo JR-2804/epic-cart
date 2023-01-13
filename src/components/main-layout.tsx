@@ -11,7 +11,7 @@ const MainLayout = ({ children }: { children: ReactNode }) => {
   }
 
   return (
-    <div className="grid h-screen w-screen grid-cols-1 grid-rows-[auto_1fr_auto]">
+    <div className="grid h-screen w-screen grid-cols-1 grid-rows-[auto_1fr_auto] bg-white dark:bg-gray-900">
       <MainHeader />
       <main className="container grid">{children}</main>
       <MainFooter />
