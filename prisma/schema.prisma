@@ -30,8 +30,8 @@ model Order {
   subtotal  Float
   taxes     Float
   total     Float
-  account   Account?    @relation(fields: [accountId], references: [id])
-  accountId String?
+  account   Account     @relation(fields: [accountId], references: [id])
+  accountId String
   items     OrderItem[]
 }
 
@@ -39,8 +39,8 @@ model OrderItem {
   id        String  @id @default(cuid())
   quantity  Int
   price     Float
-  order     Order?  @relation(fields: [orderId], references: [id])
-  orderId   String?
+  order     Order   @relation(fields: [orderId], references: [id])
+  orderId   String
   product   Product @relation(fields: [productId], references: [id])
   productId String
 }

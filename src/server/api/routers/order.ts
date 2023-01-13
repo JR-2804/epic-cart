@@ -4,10 +4,58 @@ import { createTRPCRouter, publicProcedure } from "../trpc";
 
 export const orderRouter = createTRPCRouter({
   addProductToOrder: publicProcedure
-    .input(z.object({ text: z.string() }))
-    .query(({ input }) => {
-      return {
-        greeting: `Hello ${input.text}`,
-      };
+    .input(
+      z.object({
+        account: z.string(),
+        subtotal: z.number(),
+        taxes: z.number(),
+        total: z.number(),
+        items: z.array(
+          z.object({
+            quantity: z.number(),
+            price: z.number(),
+            product: z.object({
+              id: z.string(),
+            }),
+          })
+        ),
+      })
+    )
+    .mutation(async ({ input }) => {
+      const account = await prisma?.account.findUnique({
+        where: {
+          name: input.account,
+        },
+      });
+
+      if (!account) {
+        return { success: false };
+      }
+
+      const order = await prisma?.order.create({
+        data: {
+          account: {
+            connect: {
+              id: account.id,
+            },
+          },
+          subtotal: input.subtotal,
+          taxes: input.taxes,
+          total: input.total,
+          items: {
+            create: input.items.map((item) => ({
+              price: item.price,
+              quantity: item.quantity,
+              product: { connect: { id: item.product.id } },
+            })),
+          },
+        },
+      });
+
+      if (!order) {
+        return { success: false };
+      }
+
+      return { success: true, order };
     }),
 });

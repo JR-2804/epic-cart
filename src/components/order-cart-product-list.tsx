@@ -1,15 +1,23 @@
+import { useAtom } from "jotai";
+import { cartAtom } from "../utils/store";
 import OrderCartProductListItem from "./order-cart-product-list-item";
 
-const OrderCartProductList = () => (
-  <ul className="grid">
-    <li>
-      <OrderCartProductListItem
-        product={{ id: "p1", name: "product1", price: 10 }}
-        price={10}
-        quantity={1}
-      />
-    </li>
-  </ul>
-);
+const OrderCartProductList = () => {
+  const [cart] = useAtom(cartAtom);
+
+  return (
+    <ul className="grid content-start gap-2 overflow-y-auto">
+      {cart.items.map((item) => (
+        <li key={item.product.id}>
+          <OrderCartProductListItem
+            product={item.product}
+            price={item.price}
+            quantity={item.quantity}
+          />
+        </li>
+      ))}
+    </ul>
+  );
+};
 
 export default OrderCartProductList;

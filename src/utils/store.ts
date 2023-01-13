@@ -1,3 +1,4 @@
+import type { Product } from "@prisma/client";
 import { atom } from "jotai";
 import { atomWithStorage } from "jotai/utils";
 
@@ -9,22 +10,21 @@ export interface Cart {
 }
 
 export type OrderItem = {
-  id: string;
   quantity: number;
   price: number;
-  orderId: string | null;
-  productId: string;
-};
-
-export type Product = {
-  id: string;
-  name: string;
-  price: number;
+  product: Product;
 };
 
 export const selectedAccountAtom = atomWithStorage("selectedAccount", "");
 
-export const cartAtom = atom<Cart>({
+export const clearSelectedAccountAtom = atom(
+  () => "",
+  (_get, set) => {
+    set(selectedAccountAtom, "");
+  }
+);
+
+export const cartAtom = atomWithStorage<Cart>("cart", {
   items: [],
   subtotal: 0,
   taxes: 0,
@@ -41,18 +41,61 @@ export const clearCartAtom = atom(
 export const addProductToCartAtom = atom(
   () => "",
   (get, set, product: Product) => {
-    set(cartAtom, {
-      ...get(cartAtom),
-      items: [
-        ...get(cartAtom).items,
+    const originalItems = get(cartAtom).items;
+    const existingProduct = originalItems.find(
+      (item) => item.product.id === product.id
+    );
+
+    let items = originalItems;
+    if (existingProduct) {
+      existingProduct.quantity += 1;
+      existingProduct.price += product.price;
+    } else {
+      items = [
+        ...originalItems,
         {
-          id: "",
-          orderId: null,
+          product: product,
           quantity: 1,
           price: product.price,
-          productId: product.id,
         },
-      ],
+      ];
+    }
+
+    const subtotal = items.reduce(
+      (result, item) => result + item.product.price * item.quantity,
+      0
+    );
+    const taxes = subtotal * 0.07;
+    const total = subtotal + taxes;
+
+    set(cartAtom, {
+      items,
+      subtotal,
+      taxes,
+      total,
+    });
+  }
+);
+
+export const removeProductFromCartAtom = atom(
+  () => "",
+  (get, set, product: Product) => {
+    const items = get(cartAtom).items.filter(
+      (item) => item.product.id !== product.id
+    );
+
+    const subtotal = items.reduce(
+      (result, item) => result + item.price * item.quantity,
+      0
+    );
+    const taxes = subtotal * 0.07;
+    const total = subtotal + taxes;
+
+    set(cartAtom, {
+      items,
+      subtotal,
+      taxes,
+      total,
     });
   }
 );

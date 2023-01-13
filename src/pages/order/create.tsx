@@ -5,18 +5,12 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import OrderCart from "../../components/order-cart";
 import ProductsList from "../../components/products-list";
-import useHasMounted from "../../hooks/use-has-mounted";
 import { prisma } from "../../server/db";
 import { selectedAccountAtom } from "../../utils/store";
 
 const CreateOrderPage = ({ products }: { products: Product[] }) => {
-  const hasMounted = useHasMounted();
   const router = useRouter();
   const [selectedAccount] = useAtom(selectedAccountAtom);
-
-  if (!hasMounted) {
-    return null;
-  }
 
   if (!selectedAccount) {
     void router.push("/");

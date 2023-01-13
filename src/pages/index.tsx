@@ -4,27 +4,22 @@ import Head from "next/head";
 import { Combobox } from "@headlessui/react";
 import { prisma } from "../server/db";
 import { useAtom } from "jotai";
-import { selectedAccountAtom } from "../utils/store";
+import { selectedAccountAtom, clearCartAtom } from "../utils/store";
 import { useRouter } from "next/router";
-import useHasMounted from "../hooks/use-has-mounted";
 
 const HomePage = ({ accounts }: { accounts: string[] }) => {
-  const hasMounted = useHasMounted();
-
   const router = useRouter();
   const [selectedAccount, setSelectedAccount] = useAtom(selectedAccountAtom);
+  const [, clearCart] = useAtom(clearCartAtom);
   const [query, setQuery] = useState("");
 
-  const goToCreateOrder = () => void router.push("/order/create");
+  const goToCreateOrder = () => {
+    clearCart();
+    void router.push("/order/create");
+  };
 
-  const matchesQuery = (query: string) => (account: string) =>
+  const matchesQuery = (account: string) =>
     account.toLowerCase().includes(query.toLowerCase());
-
-  const filteredAccounts = accounts.filter(matchesQuery(query));
-
-  if (!hasMounted) {
-    return null;
-  }
 
   return (
     <>
@@ -42,7 +37,7 @@ const HomePage = ({ accounts }: { accounts: string[] }) => {
             className="rounded-lg bg-red-300 p-2 placeholder:text-zinc-500"
           />
           <Combobox.Options className="bg-red-600">
-            {filteredAccounts.map((account) => (
+            {accounts.filter(matchesQuery).map((account) => (
               <Combobox.Option key={account} value={account}>
                 {account}
               </Combobox.Option>
