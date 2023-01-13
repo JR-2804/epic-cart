@@ -23,7 +23,7 @@ const HomePage = ({ accounts }: { accounts: string[] }) => {
 
   return (
     <>
-      <MetadataHead title="Salesforce Cart" />
+      <MetadataHead title="Epic Cart" />
       <main className="grid place-content-center gap-4">
         <p>Select account</p>
         <Combobox value={selectedAccount} onChange={setSelectedAccount}>
