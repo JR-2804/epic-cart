@@ -1,7 +1,7 @@
 import { useAtom } from "jotai";
 import type { NextPage } from "next";
-import Head from "next/head";
 import { useRouter } from "next/router";
+import MetadataHead from "../../components/head-metadata";
 import { clearSelectedAccountAtom } from "../../utils/store";
 
 const SuccessPage: NextPage = () => {
@@ -17,11 +17,7 @@ const SuccessPage: NextPage = () => {
 
   return (
     <>
-      <Head>
-        <title>Success</title>
-        <meta name="description" content="Salesforce interview project" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+      <MetadataHead title="Success" />
       <div className="grid place-content-center gap-4">
         <h1>Your order has been submitted successfully</h1>
         <button type="button" className="bg-slate-500" onClick={createOrder}>

@@ -1,11 +1,11 @@
 import { useState } from "react";
 import type { GetStaticProps } from "next";
-import Head from "next/head";
 import { Combobox } from "@headlessui/react";
 import { prisma } from "../server/db";
 import { useAtom } from "jotai";
 import { selectedAccountAtom, clearCartAtom } from "../utils/store";
 import { useRouter } from "next/router";
+import MetadataHead from "../components/head-metadata";
 
 const HomePage = ({ accounts }: { accounts: string[] }) => {
   const router = useRouter();
@@ -23,11 +23,7 @@ const HomePage = ({ accounts }: { accounts: string[] }) => {
 
   return (
     <>
-      <Head>
-        <title>Salesforce Cart</title>
-        <meta name="description" content="Salesforce interview project" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+      <MetadataHead title="Salesforce Cart" />
       <main className="grid place-content-center gap-4">
         <p>Select account</p>
         <Combobox value={selectedAccount} onChange={setSelectedAccount}>
