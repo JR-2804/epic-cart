@@ -25,7 +25,7 @@ const AccountSelector = ({ accounts }: { accounts: string[] }) => {
 
   return (
     <div className="relative grid w-64 md:w-96">
-      <div className="pointer-events-none absolute top-4 left-0 flex items-center pl-3">
+      <div className="pointer-events-none absolute top-4 left-0 pl-3">
         <SearchIcon />
       </div>
       <input

@@ -13,8 +13,8 @@ const ProductsList = ({ products }: { products: Product[] }) => {
 
   return (
     <div className="w-full rounded-lg border bg-white shadow-md dark:border-gray-700 dark:bg-gray-800">
-      <div className="relative flex flex-wrap rounded-t-lg border-b border-gray-200 bg-gray-50 p-4 text-center text-sm font-medium text-gray-500 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400">
-        <div className="pointer-events-none absolute top-[1.6rem] left-4 flex items-center pl-3">
+      <div className="relative rounded-t-lg border-b border-gray-200 bg-gray-50 p-4 text-center text-sm font-medium text-gray-500 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400">
+        <div className="pointer-events-none absolute top-[1.6rem] left-4 pl-3">
           <SearchIcon />
         </div>
         <input
