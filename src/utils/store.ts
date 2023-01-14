@@ -85,7 +85,35 @@ export const removeProductFromCartAtom = atom(
     );
 
     const subtotal = items.reduce(
-      (result, item) => result + item.price * item.quantity,
+      (result, item) => result + item.product.price * item.quantity,
+      0
+    );
+    const taxes = subtotal * 0.07;
+    const total = subtotal + taxes;
+
+    set(cartAtom, {
+      items,
+      subtotal,
+      taxes,
+      total,
+    });
+  }
+);
+
+export const changeProductQuantityAtom = atom(
+  () => "",
+  (get, set, { product, quantity }: { product: Product; quantity: number }) => {
+    const items = get(cartAtom).items;
+    const existingProduct = items.find(
+      (item) => item.product.id === product.id
+    );
+    if (existingProduct) {
+      existingProduct.quantity = quantity;
+      existingProduct.price = product.price * quantity;
+    }
+
+    const subtotal = items.reduce(
+      (result, item) => result + item.product.price * item.quantity,
       0
     );
     const taxes = subtotal * 0.07;

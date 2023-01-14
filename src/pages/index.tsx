@@ -23,11 +23,7 @@ const HomePage = ({ accounts }: { accounts: string[] }) => {
       <main className="mt-16 grid content-start justify-center justify-items-center gap-4">
         <AccountSelector accounts={accounts} />
         {selectedAccount && (
-          <PrimaryButton
-            text="Create Order"
-            disabled={!selectedAccount}
-            onClick={goToCreateOrder}
-          />
+          <PrimaryButton text="Create Order" onClick={goToCreateOrder} />
         )}
       </main>
     </>
