@@ -67,30 +67,6 @@ const ProductsList = ({ products }: { products: Product[] }) => {
                   </td>
                 </tr>
               ))}
-            {filteredProducts.length > 0 &&
-              filteredProducts.map((product) => (
-                <tr
-                  key={product.id}
-                  className="border-b bg-white hover:bg-gray-50 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-600"
-                >
-                  <td
-                    scope="row"
-                    className="whitespace-nowrap px-6 py-4 font-medium text-gray-900 dark:text-white"
-                  >
-                    {product.name}
-                  </td>
-                  <td className="px-6 py-4">${product.price.toFixed(2)}</td>
-                  <td className="px-6 py-4 text-right">
-                    <button
-                      type="button"
-                      className="font-medium text-blue-600 hover:underline dark:text-blue-500"
-                      onClick={() => addProductToCart(product)}
-                    >
-                      Add
-                    </button>
-                  </td>
-                </tr>
-              ))}
           </tbody>
         </table>
       </div>
