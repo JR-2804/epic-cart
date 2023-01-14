@@ -2,6 +2,7 @@ import { useAtom } from "jotai";
 import type { NextPage } from "next";
 import { useRouter } from "next/router";
 import MetadataHead from "../../components/head-metadata";
+import SuccessIcon from "../../components/icons/success-icon";
 import { clearSelectedAccountAtom } from "../../utils/store";
 
 const SuccessPage: NextPage = () => {
@@ -18,14 +19,27 @@ const SuccessPage: NextPage = () => {
   return (
     <>
       <MetadataHead title="Success" />
-      <div className="grid place-content-center gap-4">
-        <h1>Your order has been submitted successfully</h1>
-        <button type="button" className="bg-slate-500" onClick={createOrder}>
-          Create another order
-        </button>
-        <button type="button" className="bg-slate-500" onClick={changeAccount}>
-          Change account
-        </button>
+      <div className="grid place-content-center pt-8 md:pt-12">
+        <SuccessIcon />
+        <p className="mb-4 text-2xl font-semibold text-gray-900 dark:text-white">
+          Order created successfully!
+        </p>
+        <div className="grid justify-center gap-4">
+          <button
+            type="button"
+            className="w-52 rounded-lg bg-primary-600 py-2 px-3 text-center text-sm font-medium text-white hover:bg-primary-700 focus:outline-none focus:ring-4 focus:ring-primary-300 dark:focus:ring-primary-900"
+            onClick={createOrder}
+          >
+            Create another order
+          </button>
+          <button
+            type="button"
+            className="w-52 rounded-lg bg-primary-600 py-2 px-3 text-center text-sm font-medium text-white hover:bg-primary-700 focus:outline-none focus:ring-4 focus:ring-primary-300 dark:focus:ring-primary-900"
+            onClick={changeAccount}
+          >
+            Change account
+          </button>
+        </div>
       </div>
     </>
   );
