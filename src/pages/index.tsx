@@ -6,6 +6,7 @@ import { useAtom } from "jotai";
 import { selectedAccountAtom, clearCartAtom } from "../utils/store";
 import { useRouter } from "next/router";
 import MetadataHead from "../components/head-metadata";
+import PrimaryButton from "../components/primary-button";
 
 const HomePage = ({ accounts }: { accounts: string[] }) => {
   const router = useRouter();
@@ -40,14 +41,11 @@ const HomePage = ({ accounts }: { accounts: string[] }) => {
             ))}
           </Combobox.Options>
         </Combobox>
-        <button
-          type="button"
-          className="cursor-pointer bg-slate-500 text-center hover:bg-slate-600 disabled:bg-slate-200"
+        <PrimaryButton
+          text="Create Order"
           disabled={!selectedAccount}
           onClick={goToCreateOrder}
-        >
-          Create Order
-        </button>
+        />
       </main>
     </>
   );
