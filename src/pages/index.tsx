@@ -29,7 +29,6 @@ const HomePage = ({ accounts }: { accounts: string[] }) => {
             onClick={goToCreateOrder}
           />
         )}
-        <p>{selectedAccount}</p>
       </main>
     </>
   );
