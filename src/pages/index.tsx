@@ -1,7 +1,7 @@
 import type { GetStaticProps } from "next";
 import { prisma } from "../server/db";
 import { useAtom } from "jotai";
-import { selectedAccountAtom, clearCartAtom } from "../utils/store";
+import { selectedAccountAtom } from "../utils/store";
 import { useRouter } from "next/router";
 import MetadataHead from "../components/head-metadata";
 import AccountSelector from "../components/account-selector";
@@ -9,10 +9,8 @@ import AccountSelector from "../components/account-selector";
 const HomePage = ({ accounts }: { accounts: string[] }) => {
   const router = useRouter();
   const [selectedAccount] = useAtom(selectedAccountAtom);
-  const [, clearCart] = useAtom(clearCartAtom);
 
   const goToCreateOrder = () => {
-    clearCart();
     void router.push("/order/create");
   };
 

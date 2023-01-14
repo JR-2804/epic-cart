@@ -1,22 +1,25 @@
 import { type ChangeEvent, useState } from "react";
 import { useAtom } from "jotai";
-import { selectedAccountAtom } from "../utils/store";
+import { clearCartAtom, selectedAccountAtom } from "../utils/store";
 import SearchIcon from "./icons/search-icon";
 import ValidIcon from "./icons/valid-icon";
 import InvalidIcon from "./icons/invalid-icon";
 
 const AccountSelector = ({ accounts }: { accounts: string[] }) => {
   const [selectedAccount, setSelectedAccount] = useAtom(selectedAccountAtom);
+  const [, clearCart] = useAtom(clearCartAtom);
   const [query, setQuery] = useState(selectedAccount);
 
   const updateQuery = (event: ChangeEvent<HTMLInputElement>) => {
     setQuery(event.target.value);
     setSelectedAccount("");
+    clearCart("");
   };
 
   const selectAccount = (account: string) => () => {
-    setSelectedAccount(account);
     setQuery(account);
+    setSelectedAccount(account);
+    clearCart(account);
   };
 
   const filteredAccounts = accounts.filter((account) =>

@@ -29,15 +29,11 @@ const ProductsList = ({ products }: { products: Product[] }) => {
       </div>
       <div className="relative overflow-auto shadow-md">
         <table className="w-full text-left text-sm text-gray-500 dark:text-gray-400">
-          <thead className="bg-gray-50 text-xs uppercase text-gray-700 dark:bg-gray-700 dark:text-gray-400">
+          <thead className="bg-gray-50 text-xs uppercase text-gray-700 dark:bg-gray-700 dark:text-gray-200">
             <tr>
-              <th scope="col" className="px-6 py-3">
-                Name
-              </th>
-              <th scope="col" className="px-6 py-3">
-                Price
-              </th>
-              <th scope="col" className="px-6 py-3">
+              <th className="px-6 py-3">Name</th>
+              <th className="px-6 py-3">Price</th>
+              <th className="px-6 py-3">
                 <span className="sr-only">Edit</span>
               </th>
             </tr>
@@ -49,17 +45,14 @@ const ProductsList = ({ products }: { products: Product[] }) => {
                   key={product.id}
                   className="border-b bg-white hover:bg-gray-50 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-600"
                 >
-                  <td
-                    scope="row"
-                    className="whitespace-nowrap px-6 py-4 font-medium text-gray-900 dark:text-white"
-                  >
+                  <td className="whitespace-nowrap px-6 py-4 font-medium text-gray-900 dark:text-white">
                     {product.name}
                   </td>
                   <td className="px-6 py-4">${product.price.toFixed(2)}</td>
                   <td className="px-6 py-4 text-right">
                     <button
                       type="button"
-                      className="font-medium text-blue-600 hover:underline dark:text-blue-500"
+                      className="font-medium text-blue-600 hover:underline dark:text-primary-300"
                       onClick={() => addProductToCart(product)}
                     >
                       Add
