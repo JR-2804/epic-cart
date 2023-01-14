@@ -19,7 +19,7 @@ const CreateOrderPage = ({ products }: { products: Product[] }) => {
   return (
     <>
       <MetadataHead title="Create Order" />
-      <div className="grid grid-rows-1 gap-4 py-4 px-4 md:grid-cols-2 md:gap-6 md:py-8">
+      <div className="grid h-full grid-rows-1 gap-4 py-4 px-4 md:grid-cols-2 md:gap-6 md:py-8">
         <ProductsList products={products} />
         <OrderCart account={selectedAccount} />
       </div>
