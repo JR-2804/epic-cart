@@ -25,7 +25,7 @@ const OrderCartSubmit = () => {
   };
 
   return (
-    <div className="grid gap-2 justify-self-end p-4 text-gray-900 dark:text-white">
+    <div className="grid gap-2 p-4 text-gray-900 dark:text-white">
       <div className="grid grid-cols-2">
         <p>Subtotal</p>
         <p className="text-right">${cart.subtotal.toFixed(2)}</p>
@@ -40,7 +40,7 @@ const OrderCartSubmit = () => {
       </div>
       <button
         type="button"
-        className="grid h-10 w-44 grid-flow-col place-content-center items-center rounded-lg bg-blue-700 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 disabled:cursor-not-allowed dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+        className="mt-4 grid h-10 w-44 grid-flow-col place-content-center items-center justify-self-end rounded-lg bg-blue-700 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 disabled:cursor-not-allowed dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
         disabled={submitOrderMutation.isLoading || !cart.total}
         onClick={() => void submitOrder()}
       >
