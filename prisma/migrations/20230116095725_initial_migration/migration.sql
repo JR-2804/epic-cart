@@ -22,8 +22,8 @@ CREATE TABLE "Order" (
     "subtotal" REAL NOT NULL,
     "taxes" REAL NOT NULL,
     "total" REAL NOT NULL,
-    "accountId" TEXT,
-    CONSTRAINT "Order_accountId_fkey" FOREIGN KEY ("accountId") REFERENCES "Account" ("id") ON DELETE SET NULL ON UPDATE CASCADE
+    "accountId" TEXT NOT NULL,
+    CONSTRAINT "Order_accountId_fkey" FOREIGN KEY ("accountId") REFERENCES "Account" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
 );
 
 -- CreateTable
@@ -31,9 +31,9 @@ CREATE TABLE "OrderItem" (
     "id" TEXT NOT NULL PRIMARY KEY,
     "quantity" INTEGER NOT NULL,
     "price" REAL NOT NULL,
-    "orderId" TEXT,
+    "orderId" TEXT NOT NULL,
     "productId" TEXT NOT NULL,
-    CONSTRAINT "OrderItem_orderId_fkey" FOREIGN KEY ("orderId") REFERENCES "Order" ("id") ON DELETE SET NULL ON UPDATE CASCADE,
+    CONSTRAINT "OrderItem_orderId_fkey" FOREIGN KEY ("orderId") REFERENCES "Order" ("id") ON DELETE RESTRICT ON UPDATE CASCADE,
     CONSTRAINT "OrderItem_productId_fkey" FOREIGN KEY ("productId") REFERENCES "Product" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
 );
 
@@ -43,6 +43,9 @@ CREATE TABLE "Product" (
     "name" TEXT NOT NULL,
     "price" REAL NOT NULL
 );
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Account_name_key" ON "Account"("name");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Account_addressId_key" ON "Account"("addressId");

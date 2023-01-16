@@ -22,7 +22,8 @@
     "**/*.tsx",
     "**/*.cjs",
     "**/*.mjs",
-    "src/components/client-only.jsx"
+    "src/components/client-only.jsx",
+    "prisma/seed.mts"
   ],
   "exclude": ["node_modules"]
 }
