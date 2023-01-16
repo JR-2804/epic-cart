@@ -10,9 +10,17 @@ const OrderCartSubmit = () => {
   const [cart] = useAtom(cartAtom);
   const [selectedAccount] = useAtom(selectedAccountAtom);
   const [, clearCart] = useAtom(clearCartAtom);
-  const submitOrderMutation = api.order.addProductToOrder.useMutation();
+  const submitOrderMutation = api.order.addProductToOrder.useMutation({
+    onSuccess: async () => {
+      await router.push("/order/success");
+      clearCart();
+    },
+    onError: () => {
+      alert("Error occurred!");
+    },
+  });
 
-  const submitOrder = async () => {
+  const submitOrder = () => {
     submitOrderMutation.mutate({
       account: selectedAccount,
       subtotal: cart.subtotal,
@@ -20,8 +28,6 @@ const OrderCartSubmit = () => {
       total: cart.total,
       items: cart.items,
     });
-    await router.push("/order/success");
-    clearCart();
   };
 
   return (
@@ -42,7 +48,7 @@ const OrderCartSubmit = () => {
         type="button"
         className="mt-4 grid h-10 w-44 grid-flow-col place-content-center items-center justify-self-end rounded-lg bg-blue-700 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 disabled:cursor-not-allowed dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
         disabled={submitOrderMutation.isLoading || !cart.total}
-        onClick={() => void submitOrder()}
+        onClick={submitOrder}
       >
         {submitOrderMutation.isLoading ? (
           <LoadingIcon />
