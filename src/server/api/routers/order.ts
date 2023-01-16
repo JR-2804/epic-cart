@@ -21,8 +21,8 @@ export const orderRouter = createTRPCRouter({
         ),
       })
     )
-    .mutation(async ({ input }) => {
-      const account = await prisma?.account.findUnique({
+    .mutation(async ({ ctx, input }) => {
+      const account = await ctx.prisma.account.findUnique({
         where: {
           name: input.account,
         },
@@ -32,7 +32,7 @@ export const orderRouter = createTRPCRouter({
         return { success: false };
       }
 
-      const order = await prisma?.order.create({
+      const order = await ctx.prisma.order.create({
         data: {
           account: {
             connect: {
