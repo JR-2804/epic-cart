@@ -34,7 +34,7 @@ const OrderCartSubmit = () => {
         <p>Taxes</p>
         <p className="text-right">${cart.taxes.toFixed(2)}</p>
       </div>
-      <div className="grid grid-cols-2">
+      <div className="grid grid-cols-2 border-t border-gray-200 dark:border-gray-700">
         <p>Total</p>
         <p className="text-right">${cart.total.toFixed(2)}</p>
       </div>
