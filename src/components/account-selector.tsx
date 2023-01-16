@@ -41,7 +41,7 @@ const AccountSelector = ({ accounts }: { accounts: string[] }) => {
       />
       {query && query === selectedAccount && <ValidIcon />}
       {query && query !== selectedAccount && (
-        <ul className="mt-4 grid gap-2 rounded-lg border border-gray-300 bg-gray-50 p-4 text-sm text-gray-900 outline-none focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500">
+        <ul className="mt-4 grid max-h-96 gap-2 overflow-y-auto rounded-lg border border-gray-300 bg-gray-50 p-4 text-sm text-gray-900 outline-none focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500">
           {filteredAccounts.length === 0 && (
             <li className="grid grid-flow-col items-center justify-center">
               <InvalidIcon />
