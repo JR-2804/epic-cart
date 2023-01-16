@@ -21,6 +21,14 @@ The fastest way to use the app is to use from <a rel="noopener noreferrer" targe
 
 <h2 id="install-locally">Install Locally</h2>
 
+### Requirements
+
+**Node.js:** Can be downloaded from <a href="https://nodejs.org/en/">here</a>.
+
+**yarn:** Used as package manager. Can be installed using <code>npm install --global yarn</code>
+
+### Installation
+
 To get started just clone the repo.
 
 Install all dependencies.
@@ -43,29 +51,20 @@ yarn dev
 
 <h2 id="technologies">Technologies Used</h2>
 
-#### TypeScript
-Main programming language. required for typesafety.
+**TypeScript:** Main programming language. required for typesafety.
 
-##### React
-Base framework.
+**React:** Base framework.
 
-### Next.js
-Meta framework.
+**Next.js:** Meta framework.
 
-### Prisma
-ORM
+**Prisma:** ORM.
 
-### Tailwind CSS
-Used to style app
+**Tailwind CSS:** Used to style app.
 
-### TRPC
-Used to create a typesafe API
+**TRPC:** Used to create a typesafe API.
 
-### Jotai
-Used to manage local state
+**Jotai:** Used to manage local state.
 
-### PlanetScale
-Used to deploy database
+**PlanetScale:** Used to deploy database.
 
-### Vercel
-Used to deploy app
+**Vercel:** Used to deploy app.
