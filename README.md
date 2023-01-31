@@ -17,7 +17,7 @@
 
 <h2 id="use-online">Use Online</h2>
 
-The fastest way to use the app is to use from <a rel="noopener noreferrer" target="_blank" href="https://epic-cart.vercel.app/">here</a>
+The fastest way to use the app is to use from <a rel="noopener noreferrer" target="_blank" href="https://epic-cart.vercel.app/">here</a>.
 
 <h2 id="install-locally">Install Locally</h2>
 
